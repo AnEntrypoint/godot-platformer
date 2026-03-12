@@ -1,0 +1,241 @@
+[gd_scene load_steps=14 format=3 uid="uid://level"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="PackedScene" uid="uid://player" path="res://scenes/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/moving_platform.gd" id="3_platform"]
+[ext_resource type="Script" path="res://scripts/spike.gd" id="4_spike"]
+[ext_resource type="Script" path="res://scripts/collectible.gd" id="5_coin"]
+[ext_resource type="Script" path="res://scripts/goal.gd" id="6_goal"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(1200, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(120, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spike"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_coin"]
+size = Vector2(24, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_goal"]
+size = Vector2(48, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(32, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D2"]
+size = Vector2(32, 400)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_game")
+player_scene = ExtResource("2_player")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="Floor" type="CollisionShape2D" parent="Ground"]
+position = Vector2(600, 580)
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Ground"]
+position = Vector2(16, 400)
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="RightWall" type="CollisionShape2D" parent="Ground"]
+position = Vector2(1200, 400)
+shape = SubResource("RectangleShape2D2")
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Platform1" type="StaticBody2D" parent="Platforms"]
+position = Vector2(250, 480)
+
+[node name="Sprite" type="ColorRect" parent="Platforms/Platform1"]
+offset_left = -60.0
+offset_top = -12.0
+offset_right = 60.0
+offset_bottom = 12.0
+color = Color(0.3, 0.7, 0.4, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform1"]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Platform2" type="StaticBody2D" parent="Platforms"]
+position = Vector2(450, 400)
+
+[node name="Sprite" type="ColorRect" parent="Platforms/Platform2"]
+offset_left = -60.0
+offset_top = -12.0
+offset_right = 60.0
+offset_bottom = 12.0
+color = Color(0.3, 0.7, 0.4, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform2"]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="MovingPlatform" type="StaticBody2D" parent="Platforms"]
+position = Vector2(600, 320)
+script = ExtResource("3_platform")
+move_distance = 120.0
+move_speed = 2.0
+
+[node name="Sprite" type="ColorRect" parent="Platforms/MovingPlatform"]
+offset_left = -60.0
+offset_top = -12.0
+offset_right = 60.0
+offset_bottom = 12.0
+color = Color(0.4, 0.6, 0.8, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/MovingPlatform"]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Platform3" type="StaticBody2D" parent="Platforms"]
+position = Vector2(850, 250)
+
+[node name="Sprite" type="ColorRect" parent="Platforms/Platform3"]
+offset_left = -60.0
+offset_top = -12.0
+offset_right = 60.0
+offset_bottom = 12.0
+color = Color(0.3, 0.7, 0.4, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform3"]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Platform4" type="StaticBody2D" parent="Platforms"]
+position = Vector2(1050, 180)
+
+[node name="Sprite" type="ColorRect" parent="Platforms/Platform4"]
+offset_left = -60.0
+offset_top = -12.0
+offset_right = 60.0
+offset_bottom = 12.0
+color = Color(0.3, 0.7, 0.4, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform4"]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Spikes" type="Node2D" parent="."]
+
+[node name="Spike1" type="Area2D" parent="Spikes"]
+position = Vector2(350, 548)
+script = ExtResource("4_spike")
+
+[node name="Sprite" type="ColorRect" parent="Spikes/Spike1"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(0.9, 0.2, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike1"]
+shape = SubResource("RectangleShape2D_spike")
+
+[node name="Spike2" type="Area2D" parent="Spikes"]
+position = Vector2(500, 548)
+script = ExtResource("4_spike")
+
+[node name="Sprite" type="ColorRect" parent="Spikes/Spike2"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(0.9, 0.2, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike2"]
+shape = SubResource("RectangleShape2D_spike")
+
+[node name="Spike3" type="Area2D" parent="Spikes"]
+position = Vector2(700, 548)
+script = ExtResource("4_spike")
+
+[node name="Sprite" type="ColorRect" parent="Spikes/Spike3"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(0.9, 0.2, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike3"]
+shape = SubResource("RectangleShape2D_spike")
+
+[node name="Collectibles" type="Node2D" parent="."]
+
+[node name="Coin1" type="Area2D" parent="Collectibles"]
+position = Vector2(250, 440)
+script = ExtResource("5_coin")
+value = 1
+
+[node name="Sprite" type="ColorRect" parent="Collectibles/Coin1"]
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+color = Color(1, 0.85, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collectibles/Coin1"]
+shape = SubResource("RectangleShape2D_coin")
+
+[node name="Coin2" type="Area2D" parent="Collectibles"]
+position = Vector2(450, 360)
+script = ExtResource("5_coin")
+value = 1
+
+[node name="Sprite" type="ColorRect" parent="Collectibles/Coin2"]
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+color = Color(1, 0.85, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collectibles/Coin2"]
+shape = SubResource("RectangleShape2D_coin")
+
+[node name="Coin3" type="Area2D" parent="Collectibles"]
+position = Vector2(600, 280)
+script = ExtResource("5_coin")
+value = 1
+
+[node name="Sprite" type="ColorRect" parent="Collectibles/Coin3"]
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+color = Color(1, 0.85, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collectibles/Coin3"]
+shape = SubResource("RectangleShape2D_coin")
+
+[node name="Coin4" type="Area2D" parent="Collectibles"]
+position = Vector2(850, 210)
+script = ExtResource("5_coin")
+value = 1
+
+[node name="Sprite" type="ColorRect" parent="Collectibles/Coin4"]
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+color = Color(1, 0.85, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collectibles/Coin4"]
+shape = SubResource("RectangleShape2D_coin")
+
+[node name="Goal" type="Area2D" parent="."]
+position = Vector2(1050, 120)
+script = ExtResource("6_goal")
+
+[node name="Sprite" type="ColorRect" parent="Goal"]
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 32.0
+color = Color(0.2, 0.9, 0.4, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal"]
+shape = SubResource("RectangleShape2D_goal")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(600, 300)
+zoom = Vector2(1.2, 1.2)

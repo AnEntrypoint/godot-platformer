@@ -1,0 +1,5 @@
+{
+  "assistant": {
+    "default_context": "godot-dev CLI for Godot 4.x: launch game (port 6007), game HTTP API (port 6009), editor HTTP API (port 6008). Commands: godot-dev launch, game tree, game eval, editor tree, editor save, validate, watch, test. GDScript: use CharacterBody2D, await, FileAccess.open(), @export, typed vars."
+  }
+}

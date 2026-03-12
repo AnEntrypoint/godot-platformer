@@ -1,0 +1,13 @@
+{
+  "include": [
+    "**/*.gd",
+    "**/*.tscn",
+    "**/*.tres",
+    "project.godot"
+  ],
+  "exclude": [
+    "addons/godot_kit_bridge/**",
+    "addons/repl_bridge/**"
+  ],
+  "language": "gdscript"
+}

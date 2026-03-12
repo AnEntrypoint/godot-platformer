@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Godot Game",
+      "type": "godot",
+      "request": "launch",
+      "project": "${workspaceFolder}",
+      "address": "tcp://127.0.0.1",
+      "port": 6007,
+      "profiling": false
+    },
+    {
+      "name": "Attach to Godot",
+      "type": "godot",
+      "request": "attach",
+      "project": "${workspaceFolder}",
+      "address": "tcp://127.0.0.1",
+      "port": 6007
+    }
+  ]
+}

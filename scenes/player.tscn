@@ -1,0 +1,135 @@
+[gd_scene load_steps=8 format=3 uid="uid://player"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
+size = Vector2(32, 48)
+
+[sub_resource type="Animation" id="Animation_idle"]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_run"]
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.9, 0.9, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jump"]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.8, 0.8, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fall"]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.9, 0.9, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dash"]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.8, 1, 0.8, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wall_slide"]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.8, 1, 1)]
+}
+
+[node name="Player" type="CharacterBody2D"]
+floor_stop_on_slope = true
+floor_linear_slope_degree = 15.0
+floor_max_angle = 46.0
+script = ExtResource("1_player")
+max_speed = 300.0
+acceleration = 1200.0
+deceleration = 1500.0
+air_acceleration = 600.0
+air_deceleration = 400.0
+jump_velocity = -450.0
+jump_cut_velocity = -200.0
+gravity = 1200.0
+fall_gravity_multiplier = 1.5
+coyote_time = 0.15
+jump_buffer_time = 0.15
+wall_slide_speed = 100.0
+wall_jump_velocity = Vector2(300, 400)
+wall_jump_duration = 0.3
+dash_speed = 600.0
+dash_duration = 0.2
+dash_cooldown = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_player")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.4, 0.6, 1, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/idle = SubResource("Animation_idle")
+anims/run = SubResource("Animation_run")
+anims/jump = SubResource("Animation_jump")
+anims/fall = SubResource("Animation_fall")
+anims/dash = SubResource("Animation_dash")
+anims/wall_slide = SubResource("Animation_wall_slide")

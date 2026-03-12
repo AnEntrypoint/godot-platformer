@@ -1,0 +1,469 @@
+[gd_scene load_steps=22 format=3 uid="uid://lv3c003"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_plyr"]
+[ext_resource type="Script" path="res://scripts/entities/coin.gd" id="2_coin"]
+[ext_resource type="Script" path="res://scripts/entities/spike.gd" id="3_spik"]
+[ext_resource type="Script" path="res://scripts/entities/flag.gd" id="4_flag"]
+[ext_resource type="Script" path="res://scripts/entities/moving_platform.gd" id="5_mvpl"]
+[ext_resource type="Script" path="res://scripts/entities/spring.gd" id="7_sprg"]
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="6_hud"]
+
+[sub_resource type="CapsuleShape2D" id="Shape_plyr"]
+radius = 12.0
+height = 24.0
+
+[sub_resource type="RectangleShape2D" id="Shape_ground"]
+size = Vector2(400.0, 32.0)
+
+[sub_resource type="RectangleShape2D" id="Shape_plat"]
+size = Vector2(80.0, 16.0)
+
+[sub_resource type="RectangleShape2D" id="Shape_plat2"]
+size = Vector2(80.0, 16.0)
+
+[sub_resource type="RectangleShape2D" id="Shape_plat3"]
+size = Vector2(80.0, 16.0)
+
+[sub_resource type="RectangleShape2D" id="Shape_plat4"]
+size = Vector2(80.0, 16.0)
+
+[sub_resource type="RectangleShape2D" id="Shape_plat5"]
+size = Vector2(80.0, 16.0)
+
+[sub_resource type="RectangleShape2D" id="Shape_mvpl"]
+size = Vector2(80.0, 16.0)
+
+[sub_resource type="RectangleShape2D" id="Shape_lwall"]
+size = Vector2(32.0, 600.0)
+
+[sub_resource type="CircleShape2D" id="Shape_coin"]
+radius = 8.0
+
+[sub_resource type="RectangleShape2D" id="Shape_spik"]
+size = Vector2(24.0, 16.0)
+
+[sub_resource type="RectangleShape2D" id="Shape_sprg"]
+size = Vector2(32.0, 12.0)
+
+[sub_resource type="RectangleShape2D" id="Shape_flag"]
+size = Vector2(20.0, 56.0)
+
+[node name="Level3" type="Node2D"]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("6_hud")
+
+[node name="Control" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LivesLabel" type="Label" parent="HUD/Control"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 200.0
+offset_bottom = 40.0
+text = "Lives: 3"
+theme_override_font_sizes/font_size = 20
+
+[node name="CoinsLabel" type="Label" parent="HUD/Control"]
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 200.0
+offset_bottom = 72.0
+text = "Coins: 0"
+theme_override_font_sizes/font_size = 20
+
+[node name="LevelLabel" type="Label" parent="HUD/Control"]
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 200.0
+offset_bottom = 104.0
+text = "Level: 3"
+theme_override_font_sizes/font_size = 20
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(80.0, 340.0)
+script = ExtResource("1_plyr")
+
+[node name="Visual" type="ColorRect" parent="Player"]
+offset_left = -12.0
+offset_top = -24.0
+offset_right = 12.0
+offset_bottom = 24.0
+color = Color(0.4, 0.6, 1.0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("Shape_plyr")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_left = 0
+limit_top = -300
+limit_right = 1800
+limit_bottom = 600
+zoom = Vector2(1.2, 1.2)
+
+[node name="StartGround" type="StaticBody2D" parent="."]
+position = Vector2(200.0, 400.0)
+
+[node name="Visual" type="ColorRect" parent="StartGround"]
+offset_left = -200.0
+offset_top = -16.0
+offset_right = 200.0
+offset_bottom = 16.0
+color = Color(0.35, 0.35, 0.35, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartGround"]
+shape = SubResource("Shape_ground")
+
+[node name="WallLeft" type="StaticBody2D" parent="."]
+position = Vector2(-16.0, 200.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
+shape = SubResource("Shape_lwall")
+
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(480.0, 310.0)
+
+[node name="Visual" type="ColorRect" parent="Platform1"]
+offset_left = -40.0
+offset_top = -8.0
+offset_right = 40.0
+offset_bottom = 8.0
+color = Color(0.3, 0.65, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
+shape = SubResource("Shape_plat")
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(720.0, 250.0)
+
+[node name="Visual" type="ColorRect" parent="Platform2"]
+offset_left = -40.0
+offset_top = -8.0
+offset_right = 40.0
+offset_bottom = 8.0
+color = Color(0.3, 0.65, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+shape = SubResource("Shape_plat2")
+
+[node name="Platform3" type="StaticBody2D" parent="."]
+position = Vector2(960.0, 310.0)
+
+[node name="Visual" type="ColorRect" parent="Platform3"]
+offset_left = -40.0
+offset_top = -8.0
+offset_right = 40.0
+offset_bottom = 8.0
+color = Color(0.3, 0.65, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
+shape = SubResource("Shape_plat3")
+
+[node name="Platform4" type="StaticBody2D" parent="."]
+position = Vector2(1200.0, 200.0)
+
+[node name="Visual" type="ColorRect" parent="Platform4"]
+offset_left = -40.0
+offset_top = -8.0
+offset_right = 40.0
+offset_bottom = 8.0
+color = Color(0.3, 0.65, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform4"]
+shape = SubResource("Shape_plat4")
+
+[node name="Platform5" type="StaticBody2D" parent="."]
+position = Vector2(1440.0, 260.0)
+
+[node name="Visual" type="ColorRect" parent="Platform5"]
+offset_left = -40.0
+offset_top = -8.0
+offset_right = 40.0
+offset_bottom = 8.0
+color = Color(0.3, 0.65, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform5"]
+shape = SubResource("Shape_plat5")
+
+[node name="MovingPlatform1" type="AnimatableBody2D" parent="."]
+position = Vector2(600.0, 180.0)
+script = ExtResource("5_mvpl")
+move_distance = 100.0
+move_speed = 90.0
+
+[node name="Visual" type="ColorRect" parent="MovingPlatform1"]
+offset_left = -40.0
+offset_top = -8.0
+offset_right = 40.0
+offset_bottom = 8.0
+color = Color(0.6, 0.4, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform1"]
+shape = SubResource("Shape_mvpl")
+
+[node name="MovingPlatform2" type="AnimatableBody2D" parent="."]
+position = Vector2(1100.0, 140.0)
+script = ExtResource("5_mvpl")
+move_distance = 120.0
+move_speed = 100.0
+vertical = true
+
+[node name="Visual" type="ColorRect" parent="MovingPlatform2"]
+offset_left = -40.0
+offset_top = -8.0
+offset_right = 40.0
+offset_bottom = 8.0
+color = Color(0.6, 0.4, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform2"]
+shape = SubResource("Shape_mvpl")
+
+[node name="Spring1" type="Area2D" parent="."]
+position = Vector2(200.0, 392.0)
+script = ExtResource("7_sprg")
+
+[node name="Visual" type="ColorRect" parent="Spring1"]
+offset_left = -16.0
+offset_top = -6.0
+offset_right = 16.0
+offset_bottom = 6.0
+color = Color(0.1, 0.9, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spring1"]
+shape = SubResource("Shape_sprg")
+
+[node name="Spring2" type="Area2D" parent="."]
+position = Vector2(960.0, 302.0)
+script = ExtResource("7_sprg")
+
+[node name="Visual" type="ColorRect" parent="Spring2"]
+offset_left = -16.0
+offset_top = -6.0
+offset_right = 16.0
+offset_bottom = 6.0
+color = Color(0.1, 0.9, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spring2"]
+shape = SubResource("Shape_sprg")
+
+[node name="Coin1" type="Area2D" parent="."]
+position = Vector2(480.0, 275.0)
+script = ExtResource("2_coin")
+
+[node name="Visual" type="ColorRect" parent="Coin1"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1.0, 0.85, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin1"]
+shape = SubResource("Shape_coin")
+
+[node name="Coin2" type="Area2D" parent="."]
+position = Vector2(600.0, 145.0)
+script = ExtResource("2_coin")
+
+[node name="Visual" type="ColorRect" parent="Coin2"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1.0, 0.85, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin2"]
+shape = SubResource("Shape_coin")
+
+[node name="Coin3" type="Area2D" parent="."]
+position = Vector2(720.0, 215.0)
+script = ExtResource("2_coin")
+
+[node name="Visual" type="ColorRect" parent="Coin3"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1.0, 0.85, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin3"]
+shape = SubResource("Shape_coin")
+
+[node name="Coin4" type="Area2D" parent="."]
+position = Vector2(960.0, 275.0)
+script = ExtResource("2_coin")
+
+[node name="Visual" type="ColorRect" parent="Coin4"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1.0, 0.85, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin4"]
+shape = SubResource("Shape_coin")
+
+[node name="Coin5" type="Area2D" parent="."]
+position = Vector2(1200.0, 165.0)
+script = ExtResource("2_coin")
+
+[node name="Visual" type="ColorRect" parent="Coin5"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1.0, 0.85, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin5"]
+shape = SubResource("Shape_coin")
+
+[node name="Coin6" type="Area2D" parent="."]
+position = Vector2(1100.0, 105.0)
+script = ExtResource("2_coin")
+
+[node name="Visual" type="ColorRect" parent="Coin6"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1.0, 0.85, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin6"]
+shape = SubResource("Shape_coin")
+
+[node name="Coin7" type="Area2D" parent="."]
+position = Vector2(1440.0, 225.0)
+script = ExtResource("2_coin")
+
+[node name="Visual" type="ColorRect" parent="Coin7"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1.0, 0.85, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin7"]
+shape = SubResource("Shape_coin")
+
+[node name="Coin8" type="Area2D" parent="."]
+position = Vector2(1560.0, 165.0)
+script = ExtResource("2_coin")
+
+[node name="Visual" type="ColorRect" parent="Coin8"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1.0, 0.85, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin8"]
+shape = SubResource("Shape_coin")
+
+[node name="Coin9" type="Area2D" parent="."]
+position = Vector2(840.0, 215.0)
+script = ExtResource("2_coin")
+
+[node name="Visual" type="ColorRect" parent="Coin9"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1.0, 0.85, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin9"]
+shape = SubResource("Shape_coin")
+
+[node name="Coin10" type="Area2D" parent="."]
+position = Vector2(1320.0, 145.0)
+script = ExtResource("2_coin")
+
+[node name="Visual" type="ColorRect" parent="Coin10"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(1.0, 0.85, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin10"]
+shape = SubResource("Shape_coin")
+
+[node name="Spike1" type="Area2D" parent="."]
+position = Vector2(360.0, 392.0)
+script = ExtResource("3_spik")
+
+[node name="Visual" type="ColorRect" parent="Spike1"]
+offset_left = -12.0
+offset_top = -8.0
+offset_right = 12.0
+offset_bottom = 8.0
+color = Color(0.9, 0.1, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike1"]
+shape = SubResource("Shape_spik")
+
+[node name="Spike2" type="Area2D" parent="."]
+position = Vector2(840.0, 242.0)
+script = ExtResource("3_spik")
+
+[node name="Visual" type="ColorRect" parent="Spike2"]
+offset_left = -12.0
+offset_top = -8.0
+offset_right = 12.0
+offset_bottom = 8.0
+color = Color(0.9, 0.1, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike2"]
+shape = SubResource("Shape_spik")
+
+[node name="Spike3" type="Area2D" parent="."]
+position = Vector2(1320.0, 252.0)
+script = ExtResource("3_spik")
+
+[node name="Visual" type="ColorRect" parent="Spike3"]
+offset_left = -12.0
+offset_top = -8.0
+offset_right = 12.0
+offset_bottom = 8.0
+color = Color(0.9, 0.1, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike3"]
+shape = SubResource("Shape_spik")
+
+[node name="Spike4" type="Area2D" parent="."]
+position = Vector2(1560.0, 252.0)
+script = ExtResource("3_spik")
+
+[node name="Visual" type="ColorRect" parent="Spike4"]
+offset_left = -12.0
+offset_top = -8.0
+offset_right = 12.0
+offset_bottom = 8.0
+color = Color(0.9, 0.1, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike4"]
+shape = SubResource("Shape_spik")
+
+[node name="Flag" type="Area2D" parent="."]
+position = Vector2(1640.0, 100.0)
+script = ExtResource("4_flag")
+
+[node name="Pole" type="ColorRect" parent="Flag"]
+offset_left = -3.0
+offset_top = -28.0
+offset_right = 3.0
+offset_bottom = 28.0
+color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="Banner" type="ColorRect" parent="Flag"]
+offset_left = 3.0
+offset_top = -28.0
+offset_right = 19.0
+offset_bottom = -12.0
+color = Color(0.1, 0.9, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flag"]
+shape = SubResource("Shape_flag")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://spik001"]
+
+[ext_resource type="Script" path="res://scripts/entities/spike.gd" id="1_spik"]
+
+[sub_resource type="RectangleShape2D" id="Shape_spik"]
+size = Vector2(24.0, 16.0)
+
+[node name="Spike" type="Area2D"]
+script = ExtResource("1_spik")
+
+[node name="Visual" type="ColorRect" parent="."]
+offset_left = -12.0
+offset_top = -8.0
+offset_right = 12.0
+offset_bottom = 8.0
+color = Color(0.9, 0.1, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Shape_spik")

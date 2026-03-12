@@ -3,3 +3,6 @@
 export_presets.cfg
 *.translation
 node_modules/
+.gm-stop-verified
+
+.code-search/
